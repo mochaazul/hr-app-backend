@@ -1,7 +1,11 @@
 {
-  "name": "ikan-backend",
+  "name": "express-skeleton",
   "version": "0.0.1",
-  "description": "ikan-backend",
+  "author": {
+    "name": "Mochamad zulfikar",
+    "email": "m.zulfikar@rebelworks.co"},
+  "license": "MIT",
+  "description": "express-skeleton",
   "main": "src/index.ts",
   "scripts": {
     "prestart": "npm run build",
@@ -15,16 +19,8 @@
     "tsoa:generate": "ts-node _generate-tsoa.ts",
     "test": "NODE_ENV=test node runtest.js",
     "db:seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
-    "build:dev": "yarn build && scp -r ./dist/* devjms@jmsbdg.com:/home/devjms/jms-bdg-backend",
-    "start:service": "pm2 start npm --name 'dev-jms' -- run 'start'",
     "eslint": "eslint --ext .ts --fix ./src -c .eslintrc.js",
-    "prepare": "husky install",
     "watch:test" : "yarn jest --watch"
-  },
-  "husky":{
-    "hooks":{
-      "pre-push": "yarn eslint"
-    }
   },
   "moduleDirectories": [
     "node_modules",
@@ -71,8 +67,7 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "*",
     "typescript-bundle": "^1.0.18",
-    "wait-on": "^6.0.1",
-    "husky": "^8.0.0"
+    "wait-on": "^6.0.1"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
