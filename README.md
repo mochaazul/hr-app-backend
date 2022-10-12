@@ -1,1 +1,1 @@
-JMS-BDG Backend with express.js
+Backend skeleton with express.js
