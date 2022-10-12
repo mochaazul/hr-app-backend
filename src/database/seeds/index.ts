@@ -1,4 +1,3 @@
-import customerSeeds from './CustomerSeeder'
 import roleSeeds from './RoleSeeder'
 import scopeSeeds from './ScopeSeeder'
 import userSeeds from './UserSeeder'
@@ -10,7 +9,6 @@ const doSeeding = async () => {
     await scopeSeeds()
     await roleSeeds()
     await userSeeds()
-    await customerSeeds()
     console.log( 'Seeding data finished' )
   } catch ( error ) {
     return error
