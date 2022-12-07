@@ -19,5 +19,5 @@ export class LeaveRecord extends BaseEntity {
     end_date: Date
   
   @ManyToOne( () => EmployeeLeave, employee => employee.id )
-    employee: EmployeeLeave
+    employe_leave: EmployeeLeave
 }

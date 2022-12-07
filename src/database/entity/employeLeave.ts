@@ -1,5 +1,5 @@
 import {
-  Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne, Column, OneToMany
+  Entity, PrimaryGeneratedColumn, BaseEntity, ManyToOne, Column, OneToMany, JoinColumn
 } from 'typeorm'
 import { Employee } from './employee'
 import { LeaveRecord } from './leaveRecord'
@@ -10,8 +10,12 @@ export class EmployeeLeave extends BaseEntity {
     id: string
 
   @ManyToOne( () => Employee, employee => employee.id )
+  @JoinColumn( { name: 'employee_id' } )
     employee: Employee
   
+  @Column()
+    employee_id: string
+
   @Column()
     period: string
 
