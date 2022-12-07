@@ -13,6 +13,7 @@ import {
 import {
   EmployeeAddLeaveRequestBody, EmployeeCreateRequestBody, EmployeeUpdateRequestBody
 } from './employee.interfaces'
+import { AuthorizationService } from 'generated'
 
 @Tags( 'Employee' )
 @Route( '/api/employee' )
@@ -58,6 +59,7 @@ export class EmployeeController extends Controller {
       leaveRecord.start_date = start_date
       leaveRecord.end_date = end_date
       await leaveRecord.save()
+      
       return makeResponse.success( { data: employeeLeaveStats } )
     } catch ( error ) {
       return error
