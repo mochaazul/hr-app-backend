@@ -7,7 +7,7 @@ void ( async () => {
     basePath                      : '/',
     entryFile                     : 'src/app.ts',
     noImplicitAdditionalProperties: 'throw-on-extras',
-    controllerPathGlobs           : ['src/**/*.router.ts'],
+    controllerPathGlobs           : ['src/**/*.controller.ts'],
     outputDirectory               : 'tsoa',
     specVersion                   : 3,
     securityDefinitions           : {

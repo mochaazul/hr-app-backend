@@ -15,7 +15,7 @@ export interface ErrorResponseType<T> extends ResponseStatus {
 }
 
 export const success = <T = null> ( {
-  data, stat_code = 200, stat_msg = ''
+  data, stat_code = 200, stat_msg = 'SUCCESS'
 }: ResponseType<T> ): ResponseType<T> => {
   return {
     data,

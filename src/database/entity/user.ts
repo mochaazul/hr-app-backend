@@ -1,6 +1,7 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinColumn, ManyToOne
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, JoinColumn, ManyToOne, OneToOne
 } from 'typeorm'
+import { Employee } from './employee'
 import { Role } from './role'
 
 @Entity( { name: 'user' } )
@@ -20,9 +21,6 @@ export class User extends BaseEntity {
   @Column( { nullable: true } )
     birth_date?: Date
 
-  @Column( { nullable: true } )
-    phone_number: string
-
   @Column()
     password: string
 
@@ -32,4 +30,11 @@ export class User extends BaseEntity {
 
   @Column( { nullable: true } )
     role_id: number
+
+  @OneToOne( () => Employee )
+  @JoinColumn( { name: 'employee_id' } )
+    employee_data: Employee
+
+  @Column( { nullable: true } )
+    employee_id: string
 }
