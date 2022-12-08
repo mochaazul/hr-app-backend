@@ -13,22 +13,30 @@ const user_1 = require("@entity/user");
 const app_1 = require("src/app");
 const bcrypt_1 = require("src/helper/bcrypt");
 const userSeeds = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        // eslint-disable-next-line no-console
-        console.info('Seeding User data');
-        const pass = yield (0, bcrypt_1.createHashPassword)('123123');
-        const Users = {
+    // eslint-disable-next-line no-console
+    console.info('Seeding User data');
+    const pass = yield (0, bcrypt_1.createHashPassword)('123123');
+    const Users = [
+        {
             name: 'Super Admin',
             password: pass,
-            noInduk: '123',
+            email: 'admin@example.com',
             role_id: 1
-        };
-        yield app_1.db.getConnection().getRepository(user_1.User)
-            .insert(Users);
-        return Users;
-    }
-    catch (error) {
-        return '';
-    }
+        },
+        {
+            name: 'Human Resource',
+            password: pass,
+            email: 'hr@example.com',
+            role_id: 2
+        },
+        {
+            name: 'Employee',
+            password: pass,
+            email: 'employee@example.com',
+            role_id: 3
+        }
+    ];
+    yield app_1.db.getConnection().getRepository(user_1.User)
+        .insert(Users);
 });
 exports.default = userSeeds;

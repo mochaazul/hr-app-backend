@@ -12,7 +12,7 @@ export const scopeFormatter = ( scopes: Scope ): scopeFormatType => {
   ]
   const scopeKeys = Object.keys( scopes ).filter( key => !exclude.includes( key ) )
   const sc: scopeFormatType = {}
-  scopeKeys.forEach( scope => {
+  scopeKeys.forEach( ( scope: any ) => {
     const [action, feature] = scope.split( '_' )
     if ( !sc[feature] ) {
       sc[feature] = []

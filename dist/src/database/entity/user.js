@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
+const employee_1 = require("./employee");
 const role_1 = require("./role");
 let User = class User extends typeorm_1.BaseEntity {
 };
@@ -23,10 +24,6 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ unique: true }),
-    __metadata("design:type", String)
-], User.prototype, "noInduk", void 0);
-__decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
@@ -34,10 +31,6 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Date)
 ], User.prototype, "birth_date", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], User.prototype, "phone_number", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
@@ -51,6 +44,15 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
 ], User.prototype, "role_id", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => employee_1.Employee),
+    (0, typeorm_1.JoinColumn)({ name: 'employee_id' }),
+    __metadata("design:type", employee_1.Employee)
+], User.prototype, "employee_data", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], User.prototype, "employee_id", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)({ name: 'user' })
 ], User);

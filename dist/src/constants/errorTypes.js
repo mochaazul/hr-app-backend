@@ -22,5 +22,6 @@ exports.E_ERROR = {
     VALIDATION_ERROR: { message: 'E_VALIDATION_ERROR', status: enums_1.HTTP_CODE.BAD_REQUEST },
     USER_NOT_FOUND: { message: 'User not found', status: enums_1.HTTP_CODE.NO_CONTENT },
     USER_IS_NOT_AUTHORIZED: { message: 'User is not authorized', status: enums_1.HTTP_CODE.UNAUTHORIZED },
-    TOKEN_EXPIRED: { message: 'Token expired', status: enums_1.HTTP_CODE.UNAUTHORIZED }
+    TOKEN_EXPIRED: { message: 'Token expired', status: enums_1.HTTP_CODE.UNAUTHORIZED },
+    INSUFFICIENT_LEAVE_AMOUNT: { message: 'Employee does not have enough available leave', status: enums_1.HTTP_CODE.BAD_REQUEST }
 };

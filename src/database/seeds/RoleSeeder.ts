@@ -5,10 +5,20 @@ const roleSeeds = async () => {
   // eslint-disable-next-line no-console
   console.info( 'Seeding Role data' )
 
-  const role = {
-    role    : 'Super Admin',
-    scopesId: 1
-  }
+  const role = [
+    {
+      role    : 'Super Admin',
+      scopesId: 1
+    },
+    {
+      role    : 'Human Resource role',
+      scopesId: 2
+    },
+    {
+      role    : 'Employee Role',
+      scopesId: 3
+    }
+  ]
   await db.getConnection().getRepository( Role )
     .insert( role )
 }

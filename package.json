@@ -19,7 +19,7 @@
     "tsoa:generate_": "nodemon -w src -w prisma -e ts _generate-tsoa.ts",
     "tsoa:generate": "ts-node _generate-tsoa.ts",
     "test": "NODE_ENV=test node runtest.js",
-    "db:seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "db:seed": "ts-node -r tsconfig-paths/register ./utils/seeder.ts",
     "eslint": "eslint --ext .ts --fix ./src -c .eslintrc.js",
     "watch:test": "yarn jest --watch",
     "generate": "openapi --input ./tsoa/swagger.json --output ./generated"
@@ -29,7 +29,7 @@
     "src"
   ],
   "_moduleAliases": {
-    "@database": "./build/src/database/index.js",
+    "@database": "./build/src/database/index.ts",
     "@entity": "./build/src/database/entity/"
   },
   "keywords": [

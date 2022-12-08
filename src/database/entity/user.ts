@@ -12,9 +12,6 @@ export class User extends BaseEntity {
   @Column( { unique: true, nullable: true } )
     email?: string
 
-  @Column( { unique: true } )
-    noInduk: string
-
   @Column()
     name: string
 

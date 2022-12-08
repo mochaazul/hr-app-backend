@@ -12,7 +12,7 @@ export class AuthController {
   @Post( '/login' )
   public async login ( @Body() payload: LoginRequestParameter ) {
     try {
-      if ( !payload.noInduk || !payload.password ) {
+      if ( !payload.email || !payload.password ) {
         throw new Errors( E_ERROR.NIP_AND_PASSWORD_REQUIRED )
       }
       return await loginService( payload )
@@ -24,7 +24,7 @@ export class AuthController {
   @Post( '/register' )
   public async register ( @Body() payload: RegisterRequestParameter ) {
     try {
-      if ( !payload.noInduk || !payload.password || !payload.name ) {
+      if ( !payload.email || !payload.password || !payload.name ) {
         throw new Errors( E_ERROR.REGISTER_INVALID_PAYLOAD )
       }
       return await registerUserService( payload )

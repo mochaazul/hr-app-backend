@@ -9,10 +9,10 @@ export const getAllUserService = async () => {
     const formattedUsers = users.map( user => {
       const scopes = scopeFormatter( user.role.scopes )
       return {
-        id     : user.id,
-        noInduk: user.noInduk,
-        name   : user.name,
-        role   : user.role.role,
+        id   : user.id,
+        email: user.email,
+        name : user.name,
+        role : user.role.role,
         scopes
       }
     } )

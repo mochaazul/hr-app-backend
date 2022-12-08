@@ -72,7 +72,7 @@ void ( async () => {
     basePath                      : '/',
     entryFile                     : 'src/app.ts',
     noImplicitAdditionalProperties: 'throw-on-extras',
-    controllerPathGlobs           : ['src/**/*.router.ts'],
+    controllerPathGlobs           : ['src/**/*.controller.ts'],
     routesDir                     : 'tsoa',
     authenticationModule          : 'src/auth.ts'
   }

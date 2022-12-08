@@ -15,13 +15,13 @@ exports.RegisterRoutes = void 0;
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-const auth_router_1 = require("./../src/app/auth/auth.router");
+const auth_controller_1 = require("./../src/app/auth/auth.controller");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-const role_router_1 = require("./../src/app/role/role.router");
+const employee_controller_1 = require("./../src/app/employee/employee.controller");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-const user_router_1 = require("./../src/app/user/user.router");
+const role_controller_1 = require("./../src/app/role/role.controller");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-const server_status_router_1 = require("./../src/app/util-server-status/server-status.router");
+const user_controller_1 = require("./../src/app/user/user.controller");
 const auth_1 = require("./../src/auth");
 // @ts-ignore - no great way to install types from subpackage
 const promiseAny = require('promise.any');
@@ -46,6 +46,41 @@ const models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "EmployeeAddLeaveRequestBody": {
+        "dataType": "refObject",
+        "properties": {
+            "id": { "dataType": "string", "required": true },
+            "leave_type_id": { "dataType": "string", "required": true },
+            "start_date": { "dataType": "datetime", "required": true },
+            "duration": { "dataType": "double", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "EmployeeCreateRequestBody": {
+        "dataType": "refObject",
+        "properties": {
+            "noInduk": { "dataType": "string", "required": true },
+            "name": { "dataType": "string", "required": true },
+            "birth_date": { "dataType": "datetime", "required": true },
+            "phone_number": { "dataType": "string", "required": true },
+            "employement_date": { "dataType": "datetime", "required": true },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "EmployeeUpdateRequestBody": {
+        "dataType": "refObject",
+        "properties": {
+            "noInduk": { "dataType": "string" },
+            "name": { "dataType": "string" },
+            "birth_date": { "dataType": "datetime" },
+            "phone_number": { "dataType": "string" },
+            "employement_date": { "dataType": "datetime" },
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new runtime_1.ValidationService(models);
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -62,7 +97,7 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new auth_router_1.AuthController();
+            const controller = new auth_controller_1.AuthController();
             const promise = controller.login.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
@@ -79,8 +114,109 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new auth_router_1.AuthController();
+            const controller = new auth_controller_1.AuthController();
             const promise = controller.register.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/api/employee', function EmployeeController_getAllEmployee(request, response, next) {
+        const args = {};
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new employee_controller_1.EmployeeController();
+            const promise = controller.getAllEmployee.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/api/employee/leave-stats/:id', authenticateMiddleware([{ "api_key": [] }]), function EmployeeController_getEmployeLeaveStats(request, response, next) {
+        const args = {
+            id: { "in": "query", "name": "id", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new employee_controller_1.EmployeeController();
+            const promise = controller.getEmployeLeaveStats.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/api/employee/add-leave', authenticateMiddleware([{ "api_key": [] }]), function EmployeeController_addLeave(request, response, next) {
+        const args = {
+            undefined: { "in": "body", "required": true, "ref": "EmployeeAddLeaveRequestBody" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new employee_controller_1.EmployeeController();
+            const promise = controller.addLeave.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/api/employee', authenticateMiddleware([{ "api_key": [] }]), function EmployeeController_createEmployee(request, response, next) {
+        const args = {
+            body: { "in": "body", "name": "body", "required": true, "ref": "EmployeeCreateRequestBody" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new employee_controller_1.EmployeeController();
+            const promise = controller.createEmployee.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/api/employee/:id', authenticateMiddleware([{ "api_key": [] }]), function EmployeeController_updateEmployee(request, response, next) {
+        const args = {
+            id: { "in": "query", "name": "id", "required": true, "dataType": "string" },
+            body: { "in": "body", "name": "body", "required": true, "ref": "EmployeeUpdateRequestBody" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new employee_controller_1.EmployeeController();
+            const promise = controller.updateEmployee.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.delete('/api/employee/:id', authenticateMiddleware([{ "api_key": [] }]), function EmployeeController_deleteEmployee(request, response, next) {
+        const args = {
+            id: { "in": "query", "name": "id", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new employee_controller_1.EmployeeController();
+            const promise = controller.deleteEmployee.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {
@@ -94,7 +230,7 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new role_router_1.RoleController();
+            const controller = new role_controller_1.RoleController();
             const promise = controller.getAllRoles.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
@@ -109,7 +245,7 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new user_router_1.UserPermissionController();
+            const controller = new user_controller_1.UserPermissionController();
             const promise = controller.getAllUser.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
@@ -126,7 +262,7 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new user_router_1.UserPermissionController();
+            const controller = new user_controller_1.UserPermissionController();
             const promise = controller.createUser.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
@@ -144,7 +280,7 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new user_router_1.UserPermissionController();
+            const controller = new user_controller_1.UserPermissionController();
             const promise = controller.updateUser.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
@@ -161,38 +297,8 @@ function RegisterRoutes(app) {
         let validatedArgs = [];
         try {
             validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new user_router_1.UserPermissionController();
+            const controller = new user_controller_1.UserPermissionController();
             const promise = controller.deleteUser.apply(controller, validatedArgs);
-            promiseHandler(controller, promise, response, undefined, next);
-        }
-        catch (err) {
-            return next(err);
-        }
-    });
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/api/server-status', function ServerStatusController_getServerStatus(request, response, next) {
-        const args = {};
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        let validatedArgs = [];
-        try {
-            validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new server_status_router_1.ServerStatusController();
-            const promise = controller.getServerStatus.apply(controller, validatedArgs);
-            promiseHandler(controller, promise, response, undefined, next);
-        }
-        catch (err) {
-            return next(err);
-        }
-    });
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/api/server-status/routes', function ServerStatusController_getServerRoutes(request, response, next) {
-        const args = {};
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        let validatedArgs = [];
-        try {
-            validatedArgs = getValidatedArgs(args, request, response);
-            const controller = new server_status_router_1.ServerStatusController();
-            const promise = controller.getServerRoutes.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

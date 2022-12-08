@@ -43,12 +43,12 @@ const loginService = (payload) => __awaiter(void 0, void 0, void 0, function* ()
         if (!isPasswordMatch)
             throw errorTypes_1.E_ERROR.LOGIN_WRONG_PASSWORD;
         const userScope = (0, scopeHelper_1.scopeFormatter)(user.role.scopes);
-        const api_token = (0, jwt_1.createToken)({ id: user.id, noInduk: user.noInduk });
+        const api_token = (0, jwt_1.createToken)({ id: user.id, email: user.email });
         return response_1.default.success({
             data: {
                 token: api_token,
                 id: user.id,
-                noInduk: user.noInduk,
+                email: user.email,
                 name: user.name,
                 role: user.role.role,
                 scopes: userScope
@@ -70,14 +70,14 @@ exports.loginService = loginService;
  */
 const registerUserService = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield user_1.User.findOne({ where: { noInduk: payload.noInduk } });
+        const user = yield user_1.User.findOne({ where: { email: payload.email } });
         if (user != null)
             throw errorTypes_1.E_ERROR.USER_EXISTS;
         const hashedPassword = yield (0, bcrypt_1.createHashPassword)(payload.password);
         if (hashedPassword instanceof Error)
             throw hashedPassword;
         const newUser = new user_1.User();
-        newUser.noInduk = payload.noInduk;
+        newUser.email = payload.email;
         newUser.name = payload.name;
         newUser.password = hashedPassword;
         yield newUser.save();

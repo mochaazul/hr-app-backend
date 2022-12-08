@@ -15,7 +15,7 @@ void (() => __awaiter(void 0, void 0, void 0, function* () {
         basePath: '/',
         entryFile: 'src/app.ts',
         noImplicitAdditionalProperties: 'throw-on-extras',
-        controllerPathGlobs: ['src/**/*.router.ts'],
+        controllerPathGlobs: ['src/**/*.controller.ts'],
         outputDirectory: 'tsoa',
         specVersion: 3,
         securityDefinitions: {
@@ -78,7 +78,7 @@ void (() => __awaiter(void 0, void 0, void 0, function* () {
         basePath: '/',
         entryFile: 'src/app.ts',
         noImplicitAdditionalProperties: 'throw-on-extras',
-        controllerPathGlobs: ['src/**/*.router.ts'],
+        controllerPathGlobs: ['src/**/*.controller.ts'],
         routesDir: 'tsoa',
         authenticationModule: 'src/auth.ts'
     };

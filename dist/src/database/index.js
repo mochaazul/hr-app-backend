@@ -69,6 +69,16 @@ class Database {
             }
         });
     }
+    reseedData() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield (0, seeds_1.default)();
+            }
+            catch (error) {
+                console.error(error);
+            }
+        });
+    }
     getConnection() {
         return this.connection;
     }

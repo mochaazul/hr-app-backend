@@ -14,10 +14,20 @@ const app_1 = require("src/app");
 const roleSeeds = () => __awaiter(void 0, void 0, void 0, function* () {
     // eslint-disable-next-line no-console
     console.info('Seeding Role data');
-    const role = {
-        role: 'Super Admin',
-        scopesId: 1
-    };
+    const role = [
+        {
+            role: 'Super Admin',
+            scopesId: 1
+        },
+        {
+            role: 'Human Resource role',
+            scopesId: 2
+        },
+        {
+            role: 'Employee Role',
+            scopesId: 3
+        }
+    ];
     yield app_1.db.getConnection().getRepository(role_1.Role)
         .insert(role);
 });

@@ -9,7 +9,7 @@ export class EmployeeLeave extends BaseEntity {
   @PrimaryGeneratedColumn( 'identity' )
     id: string
 
-  @ManyToOne( () => Employee, employee => employee.id )
+  @ManyToOne( () => Employee, employee => employee.leaves )
   @JoinColumn( { name: 'employee_id' } )
     employee: Employee
   

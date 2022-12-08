@@ -41,6 +41,85 @@
                 ],
                 "type": "object",
                 "additionalProperties": false
+            },
+            "EmployeeAddLeaveRequestBody": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "leave_type_id": {
+                        "type": "string"
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "id",
+                    "leave_type_id",
+                    "start_date",
+                    "duration"
+                ],
+                "type": "object",
+                "additionalProperties": false
+            },
+            "EmployeeCreateRequestBody": {
+                "properties": {
+                    "noInduk": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "phone_number": {
+                        "type": "string"
+                    },
+                    "employement_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "noInduk",
+                    "name",
+                    "birth_date",
+                    "phone_number",
+                    "employement_date"
+                ],
+                "type": "object",
+                "additionalProperties": false
+            },
+            "EmployeeUpdateRequestBody": {
+                "properties": {
+                    "noInduk": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "phone_number": {
+                        "type": "string"
+                    },
+                    "employement_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object",
+                "additionalProperties": false
             }
         },
         "securitySchemes": {
@@ -119,6 +198,199 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/employee": {
+            "get": {
+                "operationId": "GetAllEmployee",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Employee"
+                ],
+                "security": [],
+                "parameters": []
+            },
+            "post": {
+                "operationId": "CreateEmployee",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmployeeCreateRequestBody"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/employee/leave-stats/{id}": {
+            "get": {
+                "operationId": "GetEmployeLeaveStats",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/employee/add-leave": {
+            "post": {
+                "operationId": "AddLeave",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmployeeAddLeaveRequestBody"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/employee/{id}": {
+            "put": {
+                "operationId": "UpdateEmployee",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmployeeUpdateRequestBody"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DeleteEmployee",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Employee"
+                ],
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
             }
         },
         "/api/roles": {
@@ -317,60 +589,6 @@
                         }
                     }
                 ]
-            }
-        },
-        "/api/server-status": {
-            "get": {
-                "operationId": "GetServerStatus",
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "serverTime": {
-                                            "type": "string"
-                                        },
-                                        "status": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "serverTime",
-                                        "status"
-                                    ],
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Server Status"
-                ],
-                "security": [],
-                "parameters": []
-            }
-        },
-        "/api/server-status/routes": {
-            "get": {
-                "operationId": "GetServerRoutes",
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Server Status"
-                ],
-                "security": [],
-                "parameters": []
             }
         }
     },

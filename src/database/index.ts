@@ -48,7 +48,15 @@ export default class Database {
 
   async reseedTestData () {
     try {
-      await doSeeding()
+      await doSeeding( )
+    } catch ( error ) {
+      console.error( error )
+    }
+  }
+
+  async reseedData () {
+    try {
+      await doSeeding( )
     } catch ( error ) {
       console.error( error )
     }

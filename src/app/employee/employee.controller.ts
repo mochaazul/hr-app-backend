@@ -13,16 +13,14 @@ import {
 import {
   EmployeeAddLeaveRequestBody, EmployeeCreateRequestBody, EmployeeUpdateRequestBody
 } from './employee.interfaces'
-import { AuthorizationService } from 'generated'
 
 @Tags( 'Employee' )
 @Route( '/api/employee' )
 export class EmployeeController extends Controller {
-  @Security( 'api_key' )
   @Get( '/' )
   public async getAllEmployee () {
     try {
-      const employees = Employee.find( { relations: ['employee_leave'] } )
+      const employees = await Employee.find( { relations: ['leaves'] } )
       return makeResponse.success( { data: employees } )
     } catch ( error ) {
       return error

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.error = exports.success = void 0;
-const success = ({ data, stat_code = 200, stat_msg = '' }) => {
+const success = ({ data, stat_code = 200, stat_msg = 'SUCCESS' }) => {
     return {
         data,
         stat_code,

@@ -21,7 +21,7 @@ export class Employee extends BaseEntity {
   @Column( { nullable: true } )
     phone_number: string
 
-  @OneToMany( () => Position, ( position: Position ) => position.id )
+  @OneToMany( () => Position, position => position.employee )
     position: Position[]
 
   @Column( { nullable: true } )
@@ -30,6 +30,6 @@ export class Employee extends BaseEntity {
   @Column()
     is_active: boolean = true
 
-  @OneToMany( () => EmployeeLeave, leave => leave.id )
+  @OneToMany( () => EmployeeLeave, leave => leave.employee )
     leaves: EmployeeLeave[]
 }
