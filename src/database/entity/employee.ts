@@ -1,5 +1,5 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn
 } from 'typeorm'
 import { EmployeeLeave } from './employeLeave'
 import { Position } from './position'
@@ -21,13 +21,17 @@ export class Employee extends BaseEntity {
   @Column( { nullable: true } )
     phone_number: string
 
-  @OneToMany( () => Position, position => position.employee )
-    position: Position[]
+  @OneToMany( () => Position, position => position.employees )
+  @JoinColumn( { name: 'position_id' } )
+    position: Position
+
+  @Column()
+    position_id: number
 
   @Column( { nullable: true } )
     employment_date: Date
   
-  @Column()
+  @Column( { default: true } )
     is_active: boolean = true
 
   @OneToMany( () => EmployeeLeave, leave => leave.employee )

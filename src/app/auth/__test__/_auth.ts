@@ -13,7 +13,7 @@ describe( 'Auth modul tests', () => {
           .send( LoginPayloadMock.emptyNipAndPassword )
           .expect( 200 )
           .then( res => {
-            shouldHaveError( res.body.response, E_ERROR.NIP_AND_PASSWORD_REQUIRED )
+            shouldHaveError( res.body.response, E_ERROR.EMAIL_AND_PASSWORD_REQUIRED )
           } )
       } )
     

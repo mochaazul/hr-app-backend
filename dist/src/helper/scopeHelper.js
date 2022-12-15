@@ -9,7 +9,7 @@ const scopeFormatter = (scopes) => {
     ];
     const scopeKeys = Object.keys(scopes).filter(key => !exclude.includes(key));
     const sc = {};
-    scopeKeys.forEach(scope => {
+    scopeKeys.forEach((scope) => {
         const [action, feature] = scope.split('_');
         if (!sc[feature]) {
             sc[feature] = [];

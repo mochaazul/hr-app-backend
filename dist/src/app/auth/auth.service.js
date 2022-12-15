@@ -34,7 +34,7 @@ const scopeHelper_1 = require("src/helper/scopeHelper");
 const loginService = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield user_1.User.findOne({
-            where: { noInduk: payload.noInduk },
+            where: { email: payload.email },
             relations: ['role', 'role.scopes']
         });
         if (user == null)
@@ -43,6 +43,7 @@ const loginService = (payload) => __awaiter(void 0, void 0, void 0, function* ()
         if (!isPasswordMatch)
             throw errorTypes_1.E_ERROR.LOGIN_WRONG_PASSWORD;
         const userScope = (0, scopeHelper_1.scopeFormatter)(user.role.scopes);
+        console.log(user.role.scopes);
         const api_token = (0, jwt_1.createToken)({ id: user.id, email: user.email });
         return response_1.default.success({
             data: {

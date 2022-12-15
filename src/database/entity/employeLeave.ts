@@ -14,7 +14,7 @@ export class EmployeeLeave extends BaseEntity {
     employee: Employee
   
   @Column()
-    employee_id: string
+    employee_id: number
 
   @Column()
     period: string

@@ -19,37 +19,31 @@ import { LoginRequestParameter, RegisterRequestParameter } from './auth.interfac
  *   - role
  */
 export const loginService = async ( payload: LoginRequestParameter ) => {
-  try {
-    const user = await User.findOne( {
-      where    : { email: payload.email },
-      relations: ['role', 'role.scopes']
-    } )
-    if ( user == null ) throw E_ERROR.LOGIN_WRONG_NIP
+  const user = await User.findOne( {
+    where    : { email: payload.email },
+    relations: ['role', 'role.scopes']
+  } )
+  if ( user == null ) throw E_ERROR.WRONG_EMAIL_OR_PASsWORD
 
-    const isPasswordMatch = await compareHash( payload.password, user.password )
-    if ( !isPasswordMatch ) throw E_ERROR.LOGIN_WRONG_PASSWORD
+  const isPasswordMatch = await compareHash( payload.password, user.password )
+  if ( !isPasswordMatch ) throw E_ERROR.WRONG_EMAIL_OR_PASsWORD
 
-    const userScope = scopeFormatter( user.role.scopes )
+  const userScope = scopeFormatter( user.role.scopes )
 
-    console.log( user.role.scopes )
+  const api_token = createToken( { id: user.id, email: user.email } )
 
-    const api_token = createToken( { id: user.id, email: user.email } )
-
-    return makeResponse.success( {
-      data: {
-        token : api_token,
-        id    : user.id,
-        email : user.email,
-        name  : user.name,
-        role  : user.role.role,
-        scopes: userScope
-      },
-      stat_code: HTTP_CODE.OK,
-      stat_msg : SUCCESS_MESSAGE.LOGIN_SUCCESS
-    } )
-  } catch ( e: any ) {
-    return await Promise.reject( new Errors( e ) )
-  }
+  return makeResponse.success( {
+    data: {
+      token : api_token,
+      id    : user.id,
+      email : user.email,
+      name  : user.name,
+      role  : user.role.role,
+      scopes: userScope
+    },
+    stat_code: HTTP_CODE.OK,
+    stat_msg : SUCCESS_MESSAGE.LOGIN_SUCCESS
+  } )
 }
 
 /**

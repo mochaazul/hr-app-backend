@@ -2,7 +2,6 @@ import {
   Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne
 } from 'typeorm'
 import { Employee } from './employee'
-
 @Entity( { name: 'position' } )
 export class Position extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -11,6 +10,6 @@ export class Position extends BaseEntity {
   @Column( { unique: true, nullable: true } )
     name?: string
 
-  @ManyToOne( () => Employee, ( employee: Employee ) => employee.id )
-    employee: Employee
+  @ManyToOne( () => Employee, employee => employee.position )
+    employees: Employee[]
 }

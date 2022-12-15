@@ -8,7 +8,7 @@
         "schemas": {
             "LoginRequestParameter": {
                 "properties": {
-                    "noInduk": {
+                    "email": {
                         "type": "string"
                     },
                     "password": {
@@ -16,7 +16,7 @@
                     }
                 },
                 "required": [
-                    "noInduk",
+                    "email",
                     "password"
                 ],
                 "type": "object",
@@ -24,7 +24,7 @@
             },
             "RegisterRequestParameter": {
                 "properties": {
-                    "noInduk": {
+                    "email": {
                         "type": "string"
                     },
                     "password": {
@@ -35,7 +35,7 @@
                     }
                 },
                 "required": [
-                    "noInduk",
+                    "email",
                     "password",
                     "name"
                 ],

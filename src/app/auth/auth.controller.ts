@@ -13,11 +13,12 @@ export class AuthController {
   public async login ( @Body() payload: LoginRequestParameter ) {
     try {
       if ( !payload.email || !payload.password ) {
-        throw new Errors( E_ERROR.NIP_AND_PASSWORD_REQUIRED )
+        throw new Errors( E_ERROR.EMAIL_AND_PASSWORD_REQUIRED )
       }
-      return await loginService( payload )
-    } catch ( error ) {
-      return error
+      const response = await loginService( payload )
+      return response
+    } catch ( error: any ) {
+      return await Promise.reject( new Errors( error ) )
     }
   }
 

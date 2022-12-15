@@ -21,7 +21,7 @@ const getAllUserService = () => __awaiter(void 0, void 0, void 0, function* () {
             const scopes = (0, scopeHelper_1.scopeFormatter)(user.role.scopes);
             return {
                 id: user.id,
-                noInduk: user.noInduk,
+                email: user.email,
                 name: user.name,
                 role: user.role.role,
                 scopes

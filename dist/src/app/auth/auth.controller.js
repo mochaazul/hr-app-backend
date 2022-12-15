@@ -30,7 +30,7 @@ let AuthController = class AuthController {
     login(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!payload.noInduk || !payload.password) {
+                if (!payload.email || !payload.password) {
                     throw new errorHandler_1.Errors(errorTypes_1.E_ERROR.NIP_AND_PASSWORD_REQUIRED);
                 }
                 return yield (0, auth_service_1.loginService)(payload);
@@ -43,7 +43,7 @@ let AuthController = class AuthController {
     register(payload) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!payload.noInduk || !payload.password || !payload.name) {
+                if (!payload.email || !payload.password || !payload.name) {
                     throw new errorHandler_1.Errors(errorTypes_1.E_ERROR.REGISTER_INVALID_PAYLOAD);
                 }
                 return yield (0, auth_service_1.registerUserService)(payload);

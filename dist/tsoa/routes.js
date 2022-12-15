@@ -30,7 +30,7 @@ const models = {
     "LoginRequestParameter": {
         "dataType": "refObject",
         "properties": {
-            "noInduk": { "dataType": "string", "required": true },
+            "email": { "dataType": "string", "required": true },
             "password": { "dataType": "string", "required": true },
         },
         "additionalProperties": false,
@@ -39,7 +39,7 @@ const models = {
     "RegisterRequestParameter": {
         "dataType": "refObject",
         "properties": {
-            "noInduk": { "dataType": "string", "required": true },
+            "email": { "dataType": "string", "required": true },
             "password": { "dataType": "string", "required": true },
             "name": { "dataType": "string", "required": true },
         },

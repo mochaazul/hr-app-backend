@@ -32,7 +32,7 @@ void (() => __awaiter(void 0, void 0, void 0, function* () {
         synchronize: true,
         logging: false
     }).then((_con) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, seeds_1.default)(_con);
+        yield (0, seeds_1.default)();
     }))
         .catch(console.error);
 }))();
