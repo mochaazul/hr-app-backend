@@ -41,10 +41,10 @@ export class EmployeeController extends Controller {
   @Security( 'api_key' )
   @Post( '/add-leave' )
   public async addLeave ( @Body() {
-    id, leave_type_id, start_date, duration
+    employee_id, leave_type_id, start_date, duration
   }: EmployeeAddLeaveRequestBody ) {
     try {
-      const employeeLeaveStats = await EmployeeLeave.findOneOrFail( { where: { employee_id: id } } )
+      const employeeLeaveStats = await EmployeeLeave.findOneOrFail( { where: { employee_id } } )
       const leaveType = await LeaveType.findOneOrFail( leave_type_id )
       if ( employeeLeaveStats.available_leave < duration ) throw E_ERROR.INSUFFICIENT_LEAVE_AMOUNT
       

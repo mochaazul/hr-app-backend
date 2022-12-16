@@ -42,7 +42,7 @@ const models: TsoaRoute.Models = {
     "EmployeeAddLeaveRequestBody": {
         "dataType": "refObject",
         "properties": {
-            "id": {"dataType":"string","required":true},
+            "employee_id": {"dataType":"string","required":true},
             "leave_type_id": {"dataType":"string","required":true},
             "start_date": {"dataType":"datetime","required":true},
             "duration": {"dataType":"double","required":true},

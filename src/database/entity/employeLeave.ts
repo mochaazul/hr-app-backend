@@ -34,6 +34,6 @@ export class EmployeeLeave extends BaseEntity {
   @Column()
     taken_leave: number
 
-  @OneToMany( () => LeaveRecord, record => record.id )
+  @OneToMany( () => LeaveRecord, record => record.employe_leave )
     records: LeaveRecord[]
 }

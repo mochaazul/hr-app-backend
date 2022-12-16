@@ -15,7 +15,7 @@ export interface EmployeeCreateRequestBody{
 }
 
 export interface EmployeeAddLeaveRequestBody{
-  id: string
+  employee_id: string
   leave_type_id: string
   start_date: Date
   duration: number

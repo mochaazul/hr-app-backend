@@ -17,11 +17,13 @@ export class TrackerController extends Controller {
     try {
       if ( !period ) throw E_ERROR.BAD_REQUEST
 
-      const employees = await Employee.find( { relations: ['leaves'] } )
+      const employees = await Employee.find( { relations: ['leaves', 'leaves.records'] } )
 
       const filteredEmployees = employees.map( employee => {
         const formattedEmployee = _.omit( employee, 'leaves' )
+
         const leaveData = employee.leaves.find( leave => leave.period === period )
+
         if ( !leaveData ) throw E_ERROR.NO_PERIOD_SPECIFIED
         const formattedLeaveData = _.omit( leaveData, ['employee_id'] )
         return { ...formattedEmployee, ...formattedLeaveData }
@@ -29,6 +31,7 @@ export class TrackerController extends Controller {
 
       return makeResponse.success( { data: filteredEmployees } )
     } catch ( error ) {
+      console.log( error )
       return error
     }
   }

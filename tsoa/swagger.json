@@ -44,7 +44,7 @@
 			},
 			"EmployeeAddLeaveRequestBody": {
 				"properties": {
-					"id": {
+					"employee_id": {
 						"type": "string"
 					},
 					"leave_type_id": {
@@ -60,7 +60,7 @@
 					}
 				},
 				"required": [
-					"id",
+					"employee_id",
 					"leave_type_id",
 					"start_date",
 					"duration"
