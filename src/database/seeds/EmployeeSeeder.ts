@@ -1,6 +1,3 @@
-import { Employee } from '@entity/employee'
-import { EmployeeLeave } from '@entity/employeLeave'
-import { db } from 'src/app'
 
 const employees = [
   {
@@ -322,7 +319,7 @@ const employees = [
 
 const randomNumber = () => Math.floor( Math.random() * 10 ) + 1
 
-const employeeSeeds = async () => {
+const employeeSeeds = () => {
   // eslint-disable-next-line no-console
   console.info( 'Seeding employee data' )
 
@@ -348,11 +345,15 @@ const employeeSeeds = async () => {
     }
   } )
 
-  await db.getConnection().getRepository( Employee )
-    .insert( employeeData )
+  // await db.getConnection().getRepository( Employee )
+  //   .insert( employeeData )
 
-  await db.getConnection().getRepository( EmployeeLeave )
-    .insert( employeLeave )
+  // await db.getConnection().getRepository( EmployeeLeave )
+  //   .insert( employeLeave )
+  return {
+    employeeData,
+    employeLeave
+  }
 }
 
 export default employeeSeeds

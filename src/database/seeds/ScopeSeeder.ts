@@ -1,7 +1,5 @@
-import { Scope } from '@entity/scopes'
-import { db } from 'src/app'
 
-const scopeSeeds = async () => {
+const scopeSeeds = () => {
   // eslint-disable-next-line no-console
   console.info( 'Seeding Scope data' )
   const scopes = [
@@ -25,8 +23,7 @@ const scopeSeeds = async () => {
     }
   ]
 
-  await db.getConnection().getRepository( Scope )
-    .insert( scopes )
+  return scopes
 }
 
 export default scopeSeeds

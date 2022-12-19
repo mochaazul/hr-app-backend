@@ -1,12 +1,10 @@
-import { User } from '@entity/user'
-import { db } from 'src/app'
 import { createHashPassword } from 'src/helper/bcrypt'
 
 const userSeeds = async () => {
   // eslint-disable-next-line no-console
   console.info( 'Seeding User data' )
 
-  const pass: any = await createHashPassword( '123123' )
+  const pass: any = createHashPassword( '123123' )
   const Users =
       [
         {
@@ -28,8 +26,9 @@ const userSeeds = async () => {
           role_id : 3
         }
       ]
-  await db.getConnection().getRepository( User )
-    .insert( Users )
+  // await db.getConnection().getRepository( User )
+  //   .insert( Users )
+  return Users
 }
 
 export default userSeeds
