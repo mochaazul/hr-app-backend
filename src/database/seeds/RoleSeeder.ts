@@ -1,7 +1,5 @@
-import { Role } from '@entity/role'
-import { db } from 'src/app'
 
-const roleSeeds = async () => {
+const roleSeeds = () => {
   // eslint-disable-next-line no-console
   console.info( 'Seeding Role data' )
 
@@ -19,8 +17,7 @@ const roleSeeds = async () => {
       scopesId: 3
     }
   ]
-  await db.getConnection().getRepository( Role )
-    .insert( role )
+  return role
 }
 
 export default roleSeeds

@@ -1,7 +1,5 @@
-import { Position } from '@entity/position'
-import { db } from 'src/app'
 
-const positionSeeds = async () => {
+const positionSeeds = () => {
   // eslint-disable-next-line no-console
   console.info( 'Seeding Position data' )
 
@@ -29,8 +27,9 @@ const positionSeeds = async () => {
         { name: 'Technical Writer' },
         { name: 'HRGA Officer' }
       ]
-  await db.getConnection().getRepository( Position )
-    .insert( positions )
+  // await db.getConnection().getRepository( Position )
+  //   .insert( positions )
+  return positions
 }
 
 export default positionSeeds
