@@ -61,10 +61,8 @@ export const changePasswordService = async ( {
     _userPassword.password = hashedPassword
     await _userPassword.save()
     return { message: 'Password change successfully' }
-  } catch ( e ) {
-    // eslint-disable-next-line no-console
-    console.log( 'error change data' )
-    console.log( e )
+  } catch ( e: any ) {
+    return await Promise.reject( new Errors( e ) )
   }
 }
 
