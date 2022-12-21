@@ -1,6 +1,7 @@
 import { Role } from '@entity/role'
 import { User } from '@entity/user'
 import { Errors } from 'src/errorHandler'
+import { createHashPassword } from 'src/helper/bcrypt'
 import { scopeFormatter } from 'src/helper/scopeHelper'
 
 export const getAllUserService = async () => {
@@ -47,6 +48,23 @@ export const createUserService = async ( { email, roles }: { email: string, role
     } )
   } catch ( e: any ) {
     return new Errors( e )
+  }
+}
+
+export const changePasswordService = async ( {
+  id, password, email
+}: {id: number, password: string, email: string} ) => {
+  try {
+    const _userPassword = await User.findOne( { where: { email }, relations: ['role', 'role.scopes'] } )
+    if ( !_userPassword ) return { message: 'User is not found' }
+    const hashedPassword = await createHashPassword( password )
+    _userPassword.password = hashedPassword
+    await _userPassword.save()
+    return { message: 'Password change successfully' }
+  } catch ( e ) {
+    // eslint-disable-next-line no-console
+    console.log( 'error change data' )
+    console.log( e )
   }
 }
 

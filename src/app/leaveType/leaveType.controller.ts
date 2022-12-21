@@ -14,7 +14,7 @@ export class LeaveTypeController extends Controller {
   @Get( '/' )
   public async getAllLeaveTypes () {
     try {
-      const leaveTypes = LeaveType.find( )
+      const leaveTypes = await LeaveType.find( )
       return makeResponse.success( { data: leaveTypes } )
     } catch ( error ) {
       return error
