@@ -7,6 +7,8 @@ import { AuthController } from './../src/app/auth/auth.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { EmployeeController } from './../src/app/employee/employee.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { LeaveTypeController } from './../src/app/leaveType/leaveType.controller';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { RoleController } from './../src/app/role/role.controller';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { TrackerController } from './../src/app/tracker/tracker.controller';
@@ -70,6 +72,26 @@ const models: TsoaRoute.Models = {
             "birth_date": {"dataType":"datetime"},
             "phone_number": {"dataType":"string"},
             "employement_date": {"dataType":"datetime"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "LeaveTypeCreatePayload": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string","required":true},
+            "code": {"dataType":"string","required":true},
+            "days": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "LeaveTypeUpdatePayload": {
+        "dataType": "refObject",
+        "properties": {
+            "name": {"dataType":"string"},
+            "code": {"dataType":"string"},
+            "days": {"dataType":"double"},
         },
         "additionalProperties": false,
     },
@@ -273,6 +295,102 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/leave-type',
+            authenticateMiddleware([{"api_key":[]}]),
+
+            function LeaveTypeController_getAllLeaveTypes(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new LeaveTypeController();
+
+
+              const promise = controller.getAllLeaveTypes.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/api/leave-type',
+            authenticateMiddleware([{"api_key":[]}]),
+
+            function LeaveTypeController_createLeaveType(request: any, response: any, next: any) {
+            const args = {
+                    undefined: {"in":"body","required":true,"ref":"LeaveTypeCreatePayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new LeaveTypeController();
+
+
+              const promise = controller.createLeaveType.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/api/leave-type/:id',
+            authenticateMiddleware([{"api_key":[]}]),
+
+            function LeaveTypeController_updateEmployee(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"query","name":"id","required":true,"dataType":"string"},
+                    undefined: {"in":"body","required":true,"ref":"LeaveTypeUpdatePayload"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new LeaveTypeController();
+
+
+              const promise = controller.updateEmployee.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/api/leave-type/:id',
+            authenticateMiddleware([{"api_key":[]}]),
+
+            function LeaveTypeController_deleteEmployee(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"query","name":"id","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new LeaveTypeController();
+
+
+              const promise = controller.deleteEmployee.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/api/roles',
             authenticateMiddleware([{"api_key":["read:role"]}]),
 
@@ -360,6 +478,31 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.createUser.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/api/user-permission/change-password/:id',
+            authenticateMiddleware([{"api_key":["read:employee"]}]),
+
+            function UserPermissionController_changePassword(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"query","name":"id","required":true,"dataType":"string"},
+                    body: {"in":"body","name":"body","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"password":{"dataType":"string","required":true},"email":{"dataType":"string","required":true}}},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new UserPermissionController();
+
+
+              const promise = controller.changePassword.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

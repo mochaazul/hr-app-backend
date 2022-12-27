@@ -26,6 +26,7 @@ export async function expressAuthentication (
       if ( user == null ) {
         throw E_ERROR.USER_NOT_FOUND
       }
+
       const userScopes: any = user.role.scopes
       const userScopeKeys = Object.keys( userScopes )
         .filter( key => ![
@@ -36,6 +37,7 @@ export async function expressAuthentication (
         .map( scope => ( scope.replace( /_/g, ':' ) ) )
 
       const isScopeValid = scopes?.every( scope => userScopeKeys.includes( scope ) )
+
       if ( !isScopeValid ) throw E_ERROR.USER_IS_NOT_AUTHORIZED
       return await new Promise( ( resolve, reject ) => {
         resolve( decoded )
