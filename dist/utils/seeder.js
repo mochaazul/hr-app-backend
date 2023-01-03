@@ -12,13 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const seeds_1 = __importDefault(require("src/database/seeds"));
+const seeds_1 = __importDefault(require("utils/seeds"));
 const typeorm_1 = require("typeorm");
 const dotenv_1 = __importDefault(require("dotenv"));
+const scopes_1 = require("@entity/scopes");
+const user_1 = require("@entity/user");
+const employee_1 = require("@entity/employee");
+const position_1 = require("@entity/position");
+const employeLeave_1 = require("@entity/employeLeave");
+const role_1 = require("@entity/role");
+const leaveRecord_1 = require("@entity/leaveRecord");
+const leaveType_1 = require("@entity/leaveType");
 dotenv_1.default.config({});
 void (() => __awaiter(void 0, void 0, void 0, function* () {
     // eslint-disable-next-line n/no-path-concat
-    console.log(__dirname + '/entity/*.ts');
     yield (0, typeorm_1.createConnection)({
         type: 'postgres',
         host: 'localhost',
@@ -27,12 +34,21 @@ void (() => __awaiter(void 0, void 0, void 0, function* () {
         password: process.env.TEST_DATABASE_PASSWORD,
         database: process.env.TEST_DATABASE_NAME,
         // eslint-disable-next-line n/no-path-concat
-        entities: ['../src/database/entity/*.ts'],
+        entities: [
+            scopes_1.Scope,
+            user_1.User,
+            employee_1.Employee,
+            position_1.Position,
+            employeLeave_1.EmployeeLeave,
+            role_1.Role,
+            leaveRecord_1.LeaveRecord,
+            leaveType_1.LeaveType
+        ],
         dropSchema: true,
         synchronize: true,
         logging: false
     }).then((_con) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, seeds_1.default)();
+        yield (0, seeds_1.default)(_con);
     }))
         .catch(console.error);
 }))();

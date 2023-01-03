@@ -56,10 +56,10 @@ let EmployeeController = class EmployeeController extends tsoa_1.Controller {
             }
         });
     }
-    addLeave({ id, leave_type_id, start_date, duration }) {
+    addLeave({ employee_id, leave_type_id, start_date, duration }) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const employeeLeaveStats = yield employeLeave_1.EmployeeLeave.findOneOrFail({ where: { employee_id: id } });
+                const employeeLeaveStats = yield employeLeave_1.EmployeeLeave.findOneOrFail({ where: { employee_id } });
                 const leaveType = yield leaveType_1.LeaveType.findOneOrFail(leave_type_id);
                 if (employeeLeaveStats.available_leave < duration)
                     throw errorTypes_1.E_ERROR.INSUFFICIENT_LEAVE_AMOUNT;

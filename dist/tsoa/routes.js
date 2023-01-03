@@ -21,6 +21,8 @@ const employee_controller_1 = require("./../src/app/employee/employee.controller
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const role_controller_1 = require("./../src/app/role/role.controller");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const tracker_controller_1 = require("./../src/app/tracker/tracker.controller");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const user_controller_1 = require("./../src/app/user/user.controller");
 const auth_1 = require("./../src/auth");
 // @ts-ignore - no great way to install types from subpackage
@@ -49,7 +51,7 @@ const models = {
     "EmployeeAddLeaveRequestBody": {
         "dataType": "refObject",
         "properties": {
-            "id": { "dataType": "string", "required": true },
+            "employee_id": { "dataType": "string", "required": true },
             "leave_type_id": { "dataType": "string", "required": true },
             "start_date": { "dataType": "datetime", "required": true },
             "duration": { "dataType": "double", "required": true },
@@ -232,6 +234,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new role_controller_1.RoleController();
             const promise = controller.getAllRoles.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/api/tracker', function TrackerController_getTracker(request, response, next) {
+        const args = {
+            period: { "in": "query", "name": "period", "required": true, "dataType": "string" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new tracker_controller_1.TrackerController();
+            const promise = controller.getTracker.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

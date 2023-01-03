@@ -1,4 +1,4 @@
-import doSeeding from 'src/database/seeds'
+import doSeeding from 'utils/seeds'
 import { createConnection } from 'typeorm'
 import dotenv from 'dotenv'
 import { Scope } from '@entity/scopes'

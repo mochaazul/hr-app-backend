@@ -26,7 +26,7 @@ __decorate([
 ], EmployeeLeave.prototype, "employee", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], EmployeeLeave.prototype, "employee_id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
@@ -53,7 +53,7 @@ __decorate([
     __metadata("design:type", Number)
 ], EmployeeLeave.prototype, "taken_leave", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => leaveRecord_1.LeaveRecord, record => record.id),
+    (0, typeorm_1.OneToMany)(() => leaveRecord_1.LeaveRecord, record => record.employe_leave),
     __metadata("design:type", Array)
 ], EmployeeLeave.prototype, "records", void 0);
 EmployeeLeave = __decorate([

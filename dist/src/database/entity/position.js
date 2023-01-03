@@ -23,9 +23,9 @@ __decorate([
     __metadata("design:type", String)
 ], Position.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => employee_1.Employee, (employee) => employee.id),
-    __metadata("design:type", employee_1.Employee)
-], Position.prototype, "employee", void 0);
+    (0, typeorm_1.ManyToOne)(() => employee_1.Employee, employee => employee.position),
+    __metadata("design:type", Array)
+], Position.prototype, "employees", void 0);
 Position = __decorate([
     (0, typeorm_1.Entity)({ name: 'position' })
 ], Position);

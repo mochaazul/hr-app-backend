@@ -23,7 +23,7 @@ describe('Auth modul tests', () => {
                     .send(_auth_mock_1.LoginPayloadMock.emptyNipAndPassword)
                     .expect(200)
                     .then(res => {
-                    (0, testHelper_1.shouldHaveError)(res.body.response, errorTypes_1.E_ERROR.NIP_AND_PASSWORD_REQUIRED);
+                    (0, testHelper_1.shouldHaveError)(res.body.response, errorTypes_1.E_ERROR.EMAIL_AND_PASSWORD_REQUIRED);
                 });
             }));
             it('POST /login with wrong noInduk', () => __awaiter(void 0, void 0, void 0, function* () {

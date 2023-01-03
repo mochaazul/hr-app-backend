@@ -20,57 +20,49 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthController = void 0;
+exports.TrackerController = void 0;
+const employee_1 = require("@entity/employee");
+const lodash_1 = __importDefault(require("lodash"));
 const errorTypes_1 = require("src/constants/errorTypes");
-const errorHandler_1 = require("src/errorHandler");
+const response_1 = __importDefault(require("src/helper/response"));
 const tsoa_1 = require("tsoa");
-const auth_service_1 = require("./auth.service");
-let AuthController = class AuthController {
-    login(payload) {
+let TrackerController = class TrackerController extends tsoa_1.Controller {
+    getTracker(period) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (!payload.email || !payload.password) {
-                    throw new errorHandler_1.Errors(errorTypes_1.E_ERROR.EMAIL_AND_PASSWORD_REQUIRED);
-                }
-                const response = yield (0, auth_service_1.loginService)(payload);
-                return response;
+                if (!period)
+                    throw errorTypes_1.E_ERROR.BAD_REQUEST;
+                const employees = yield employee_1.Employee.find({ relations: ['leaves', 'leaves.records'] });
+                const filteredEmployees = employees.map(employee => {
+                    const formattedEmployee = lodash_1.default.omit(employee, 'leaves');
+                    const leaveData = employee.leaves.find(leave => leave.period === period);
+                    if (!leaveData)
+                        throw errorTypes_1.E_ERROR.NO_PERIOD_SPECIFIED;
+                    const formattedLeaveData = lodash_1.default.omit(leaveData, ['employee_id']);
+                    return Object.assign(Object.assign({}, formattedEmployee), formattedLeaveData);
+                });
+                return response_1.default.success({ data: filteredEmployees });
             }
             catch (error) {
-                return yield Promise.reject(new errorHandler_1.Errors(error));
-            }
-        });
-    }
-    register(payload) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                if (!payload.email || !payload.password || !payload.name) {
-                    throw new errorHandler_1.Errors(errorTypes_1.E_ERROR.REGISTER_INVALID_PAYLOAD);
-                }
-                return yield (0, auth_service_1.registerUserService)(payload);
-            }
-            catch (error) {
+                console.log(error);
                 return error;
             }
         });
     }
 };
 __decorate([
-    (0, tsoa_1.Post)('/login'),
-    __param(0, (0, tsoa_1.Body)()),
+    (0, tsoa_1.Get)('/'),
+    __param(0, (0, tsoa_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], AuthController.prototype, "login", null);
-__decorate([
-    (0, tsoa_1.Post)('/register'),
-    __param(0, (0, tsoa_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], AuthController.prototype, "register", null);
-AuthController = __decorate([
-    (0, tsoa_1.Tags)('Authorization'),
-    (0, tsoa_1.Route)('/api/auth')
-], AuthController);
-exports.AuthController = AuthController;
+], TrackerController.prototype, "getTracker", null);
+TrackerController = __decorate([
+    (0, tsoa_1.Tags)('Tracker'),
+    (0, tsoa_1.Route)('/api/tracker')
+], TrackerController);
+exports.TrackerController = TrackerController;

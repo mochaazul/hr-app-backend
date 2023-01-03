@@ -16,7 +16,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable no-console */
 const typeorm_1 = require("typeorm");
 const dotenv_1 = __importDefault(require("dotenv"));
-const seeds_1 = __importDefault(require("./seeds"));
 dotenv_1.default.config({});
 class Database {
     connectToDB() {
@@ -54,29 +53,8 @@ class Database {
             }).then((_con) => __awaiter(this, void 0, void 0, function* () {
                 this.connection = _con;
                 console.log('Connected to db!!');
-                yield this.reseedTestData();
             }))
                 .catch(console.error);
-        });
-    }
-    reseedTestData() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield (0, seeds_1.default)();
-            }
-            catch (error) {
-                console.error(error);
-            }
-        });
-    }
-    reseedData() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                yield (0, seeds_1.default)();
-            }
-            catch (error) {
-                console.error(error);
-            }
         });
     }
     getConnection() {

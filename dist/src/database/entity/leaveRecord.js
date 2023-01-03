@@ -32,9 +32,18 @@ __decorate([
     __metadata("design:type", Date)
 ], LeaveRecord.prototype, "end_date", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], LeaveRecord.prototype, "reason", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => employeLeave_1.EmployeeLeave, employee => employee.id),
+    (0, typeorm_1.JoinColumn)({ name: 'employee_leave_id' }),
     __metadata("design:type", employeLeave_1.EmployeeLeave)
 ], LeaveRecord.prototype, "employe_leave", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], LeaveRecord.prototype, "employee_leave_id", void 0);
 LeaveRecord = __decorate([
     (0, typeorm_1.Entity)({ name: 'leave_record' })
 ], LeaveRecord);

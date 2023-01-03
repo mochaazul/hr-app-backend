@@ -32,35 +32,29 @@ const scopeHelper_1 = require("src/helper/scopeHelper");
  *   - role
  */
 const loginService = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user = yield user_1.User.findOne({
-            where: { email: payload.email },
-            relations: ['role', 'role.scopes']
-        });
-        if (user == null)
-            throw errorTypes_1.E_ERROR.LOGIN_WRONG_NIP;
-        const isPasswordMatch = yield (0, bcrypt_1.compareHash)(payload.password, user.password);
-        if (!isPasswordMatch)
-            throw errorTypes_1.E_ERROR.LOGIN_WRONG_PASSWORD;
-        const userScope = (0, scopeHelper_1.scopeFormatter)(user.role.scopes);
-        console.log(user.role.scopes);
-        const api_token = (0, jwt_1.createToken)({ id: user.id, email: user.email });
-        return response_1.default.success({
-            data: {
-                token: api_token,
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                role: user.role.role,
-                scopes: userScope
-            },
-            stat_code: enums_1.HTTP_CODE.OK,
-            stat_msg: languageEnums_1.SUCCESS_MESSAGE.LOGIN_SUCCESS
-        });
-    }
-    catch (e) {
-        return yield Promise.reject(new errorHandler_1.Errors(e));
-    }
+    const user = yield user_1.User.findOne({
+        where: { email: payload.email },
+        relations: ['role', 'role.scopes']
+    });
+    if (user == null)
+        throw errorTypes_1.E_ERROR.WRONG_EMAIL_OR_PASsWORD;
+    const isPasswordMatch = yield (0, bcrypt_1.compareHash)(payload.password, user.password);
+    if (!isPasswordMatch)
+        throw errorTypes_1.E_ERROR.WRONG_EMAIL_OR_PASsWORD;
+    const userScope = (0, scopeHelper_1.scopeFormatter)(user.role.scopes);
+    const api_token = (0, jwt_1.createToken)({ id: user.id, email: user.email });
+    return response_1.default.success({
+        data: {
+            token: api_token,
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role.role,
+            scopes: userScope
+        },
+        stat_code: enums_1.HTTP_CODE.OK,
+        stat_msg: languageEnums_1.SUCCESS_MESSAGE.LOGIN_SUCCESS
+    });
 });
 exports.loginService = loginService;
 /**

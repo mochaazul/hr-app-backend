@@ -16,6 +16,7 @@
     "dev": "concurrently \"npm run tsoa:generate_\" \"npm run start:dev\"",
     "prebuild": "rimraf ./build && npm run tsoa:generate",
     "build": "tsc",
+    "build:bin": "build && ",
     "tsoa:generate_": "nodemon -w src -w prisma -e ts _generate-tsoa.ts",
     "tsoa:generate": "ts-node _generate-tsoa.ts",
     "test": "NODE_ENV=test node runtest.js",

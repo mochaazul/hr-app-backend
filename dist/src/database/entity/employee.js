@@ -40,15 +40,20 @@ __decorate([
     __metadata("design:type", String)
 ], Employee.prototype, "phone_number", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => position_1.Position, position => position.employee),
-    __metadata("design:type", Array)
+    (0, typeorm_1.OneToMany)(() => position_1.Position, position => position.employees),
+    (0, typeorm_1.JoinColumn)({ name: 'position_id' }),
+    __metadata("design:type", position_1.Position)
 ], Employee.prototype, "position", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Employee.prototype, "position_id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Date)
 ], Employee.prototype, "employment_date", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
 ], Employee.prototype, "is_active", void 0);
 __decorate([

@@ -44,7 +44,7 @@
             },
             "EmployeeAddLeaveRequestBody": {
                 "properties": {
-                    "id": {
+                    "employee_id": {
                         "type": "string"
                     },
                     "leave_type_id": {
@@ -60,7 +60,7 @@
                     }
                 },
                 "required": [
-                    "id",
+                    "employee_id",
                     "leave_type_id",
                     "start_date",
                     "duration"
@@ -417,6 +417,35 @@
                     }
                 ],
                 "parameters": []
+            }
+        },
+        "/api/tracker": {
+            "get": {
+                "operationId": "GetTracker",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Tracker"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "period",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
             }
         },
         "/api/user-permission/get-all": {
